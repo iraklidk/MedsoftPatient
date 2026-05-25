@@ -1,14 +1,15 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class PatientsHandler
-
+    Private ReadOnly connString As SqlConnection = Database.GetConnectionString()
     Public Function GetPatientByID(PatientID As Integer) As PatientsModel
         Dim dt As New DataTable()
         Dim model As New PatientsModel
+
         Try
-            Using Sa As New SqlDataAdapter("dbo.PatientGet", Database.GetConnectionString())
+            Using Sa As New SqlDataAdapter("dbo.PatientGetById", connString)
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
-                Sa.SelectCommand.Parameters.AddWithValue("@ID", PatientID)
+                Sa.SelectCommand.Parameters.AddWithValue("@PatientId", PatientID)
                 Sa.Fill(dt)
             End Using
 
@@ -24,18 +25,50 @@ Public Class PatientsHandler
             End If
 
         Catch ex As Exception
-            MessageBox.Show($"პაციენტის მონაცემების ჩატვირთვის შეცდომა: {ex.Message}", "შეცდომა",
+            MessageBox.Show($"შეცდომა პაციენტის წაკითხვის დროს: {ex.Message}", "შეცდომა",
                     MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
         Return model
     End Function
 
-    Public Function GetPatients() As DataTable
+    Public Sub FillGendersComboBox(ComboboxGenders As ComboBox)
         Dim dt As New DataTable()
-        Dim conn As SqlConnection = Database.GetConnectionString()
         Try
-            Using sa As New SqlDataAdapter("dbo.PatientListGet", Database.GetConnectionString())
+            Using Sa As New SqlDataAdapter("dbo.GetGenderList", connString)
+                Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.Fill(dt)
+                Dim row As DataRow = dt.NewRow()
+                row("GenderID") = 0
+                row("GenderName") = "ყველა"
+
+                ' Insert at first position
+                dt.Rows.InsertAt(row, 0)
+                ComboboxGenders.DataSource = dt
+                ComboboxGenders.DisplayMember = "GenderName"
+                ComboboxGenders.ValueMember = "GenderID"
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show($"შეცდომა სქესების წაკითხვის დროს: {ex.Message}", "შეცდომა",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Function GetPatients(Optional patientID As Integer = 0, Optional activeStatus As Integer = 1,
+                                Optional fullName As String = Nothing, Optional personalNumber As String = Nothing,
+                                Optional address As String = Nothing, Optional genderId As Integer = 0) As DataTable
+        Dim dt As New DataTable()
+        Dim conn As SqlConnection = connString
+        Try
+            Using sa As New SqlDataAdapter("dbo.PatientListGet", connString)
                 sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                sa.SelectCommand.Parameters.Add("@PatientID", SqlDbType.Int).Value = patientID
+                sa.SelectCommand.Parameters.Add("@ActiveStatus", SqlDbType.Int).Value = activeStatus
+                sa.SelectCommand.Parameters.Add("@FullName", SqlDbType.NVarChar).Value = If(fullName, DBNull.Value)
+                sa.SelectCommand.Parameters.Add("@PersonalNumber", SqlDbType.NVarChar).Value = If(personalNumber, DBNull.Value)
+                sa.SelectCommand.Parameters.Add("@Address", SqlDbType.NVarChar).Value = If(address, DBNull.Value)
+                sa.SelectCommand.Parameters.Add("@Gender", SqlDbType.Int).Value = genderId
                 sa.Fill(dt)
             End Using
 
@@ -47,9 +80,25 @@ Public Class PatientsHandler
         Return dt
     End Function
 
+    Public Sub FillStatusComboBox(ComboboxStatus As ComboBox)
+
+        Dim dt As New DataTable()
+        dt.Columns.Add("ID", GetType(Integer))
+        dt.Columns.Add("Status", GetType(String))
+
+        dt.Rows.Add(1, "აქტიური")
+        dt.Rows.Add(0, "არააქტიური")
+        dt.Rows.Add(2, "ყველა")
+
+        ComboboxStatus.DataSource = dt
+        ComboboxStatus.ValueMember = "ID"
+        ComboboxStatus.DisplayMember = "Status"
+
+    End Sub
+
     Public Function SavePatient(ByVal model As PatientsModel) As Integer
         Try
-            Using Sa As New SqlDataAdapter("dbo.PatientSet", Database.GetConnectionString())
+            Using Sa As New SqlDataAdapter("dbo.UpdatePatient", connString)
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
 
                 Sa.SelectCommand.Parameters.AddWithValue("@ID", model.ID Or Nothing)
@@ -61,17 +110,18 @@ Public Class PatientsHandler
                 Sa.SelectCommand.Parameters.AddWithValue("@PersonalNumber", model.PersonalNumber)
                 Sa.SelectCommand.Parameters.AddWithValue("@Email", model.Email)
 
-                Dim statusParam As New SqlParameter("@Status", SqlDbType.Int)
+                Dim statusParam As New SqlParameter("@StatusCode", SqlDbType.Int)
                 statusParam.Direction = ParameterDirection.Output
                 Sa.SelectCommand.Parameters.Add(statusParam)
 
                 Sa.SelectCommand.Connection.Open()
                 Sa.SelectCommand.ExecuteNonQuery()
-                Dim statusCode = Convert.ToInt32(Sa.SelectCommand.Parameters("@Status").Value)
+                Dim statusCode = Convert.ToInt32(Sa.SelectCommand.Parameters("@StatusCode").Value)
                 Return statusCode
             End Using
+
         Catch ex As Exception
-            MessageBox.Show("დაფიქსირდა შეცდომა" & ex.Message)
+            MessageBox.Show("დაფიქსირდა შეცდომა: " & ex.Message)
             Return -1
         End Try
     End Function
@@ -79,7 +129,7 @@ Public Class PatientsHandler
     Public Sub GetStatus(ComboboxStatus As ComboBox)
         Try
             Dim dt As New DataTable()
-            Using Sa As New SqlDataAdapter("dbo.PatientStatusGet", Database.GetConnectionString())
+            Using Sa As New SqlDataAdapter("dbo.PatientStatusGet", connString)
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
                 Sa.Fill(dt)
 
@@ -87,15 +137,15 @@ Public Class PatientsHandler
                 ComboboxStatus.ValueMember = "ID"
                 ComboboxStatus.DisplayMember = "StatusName"
             End Using
-        Catch ex As Exception
 
+        Catch ex As Exception
         End Try
     End Sub
 
     Public Function DeletePatientsList(ByVal idList As DataTable) As Integer
         If idList Is Nothing OrElse idList.Rows.Count = 0 Then Return 0
         Try
-            Using Sa As New SqlCommand("dbo.PatientDelete", Database.GetConnectionString())
+            Using Sa As New SqlCommand("dbo.PatientDelete", connString)
                 Sa.CommandType = CommandType.StoredProcedure
 
                 Dim param As New SqlParameter()
@@ -109,6 +159,7 @@ Public Class PatientsHandler
                 Sa.ExecuteNonQuery()
                 Return True
             End Using
+
         Catch ex As Exception
             MessageBox.Show("მოხდა შეცდომა" & ex.Message)
             Return 1

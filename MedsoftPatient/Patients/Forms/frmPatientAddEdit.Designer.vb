@@ -47,7 +47,7 @@ Partial Class frmPatientAddEdit
         Me.lbFullName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbFullName.Location = New System.Drawing.Point(48, 32)
         Me.lbFullName.Name = "lbFullName"
-        Me.lbFullName.Size = New System.Drawing.Size(246, 35)
+        Me.lbFullName.Size = New System.Drawing.Size(161, 35)
         Me.lbFullName.TabIndex = 0
         Me.lbFullName.Text = "პაციენტი:"
         Me.lbFullName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -55,9 +55,9 @@ Partial Class frmPatientAddEdit
         'lbPhone
         '
         Me.lbPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbPhone.Location = New System.Drawing.Point(47, 85)
+        Me.lbPhone.Location = New System.Drawing.Point(47, 358)
         Me.lbPhone.Name = "lbPhone"
-        Me.lbPhone.Size = New System.Drawing.Size(263, 60)
+        Me.lbPhone.Size = New System.Drawing.Size(162, 60)
         Me.lbPhone.TabIndex = 2
         Me.lbPhone.Text = "მობილური:"
         Me.lbPhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -65,9 +65,9 @@ Partial Class frmPatientAddEdit
         'lbGender
         '
         Me.lbGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbGender.Location = New System.Drawing.Point(48, 145)
+        Me.lbGender.Location = New System.Drawing.Point(49, 151)
         Me.lbGender.Name = "lbGender"
-        Me.lbGender.Size = New System.Drawing.Size(212, 60)
+        Me.lbGender.Size = New System.Drawing.Size(160, 60)
         Me.lbGender.TabIndex = 3
         Me.lbGender.Text = "სქესი:"
         Me.lbGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -75,9 +75,9 @@ Partial Class frmPatientAddEdit
         'lbDob
         '
         Me.lbDob.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbDob.Location = New System.Drawing.Point(47, 212)
+        Me.lbDob.Location = New System.Drawing.Point(47, 220)
         Me.lbDob.Name = "lbDob"
-        Me.lbDob.Size = New System.Drawing.Size(275, 60)
+        Me.lbDob.Size = New System.Drawing.Size(162, 60)
         Me.lbDob.TabIndex = 4
         Me.lbDob.Text = "დაბ.თარიღი:"
         Me.lbDob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -85,9 +85,9 @@ Partial Class frmPatientAddEdit
         'lbAddress
         '
         Me.lbAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbAddress.Location = New System.Drawing.Point(48, 271)
+        Me.lbAddress.Location = New System.Drawing.Point(48, 280)
         Me.lbAddress.Name = "lbAddress"
-        Me.lbAddress.Size = New System.Drawing.Size(262, 78)
+        Me.lbAddress.Size = New System.Drawing.Size(161, 78)
         Me.lbAddress.TabIndex = 5
         Me.lbAddress.Text = "მისამართი:"
         Me.lbAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -95,7 +95,7 @@ Partial Class frmPatientAddEdit
         'lbPersonalId
         '
         Me.lbPersonalId.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbPersonalId.Location = New System.Drawing.Point(48, 349)
+        Me.lbPersonalId.Location = New System.Drawing.Point(47, 82)
         Me.lbPersonalId.Name = "lbPersonalId"
         Me.lbPersonalId.Size = New System.Drawing.Size(162, 69)
         Me.lbPersonalId.TabIndex = 6
@@ -107,7 +107,7 @@ Partial Class frmPatientAddEdit
         Me.lbEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbEmail.Location = New System.Drawing.Point(48, 418)
         Me.lbEmail.Name = "lbEmail"
-        Me.lbEmail.Size = New System.Drawing.Size(219, 80)
+        Me.lbEmail.Size = New System.Drawing.Size(161, 80)
         Me.lbEmail.TabIndex = 7
         Me.lbEmail.Text = "ელ. ფოსტა:"
         Me.lbEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -155,14 +155,14 @@ Partial Class frmPatientAddEdit
         '
         'txtPersonalNumber
         '
-        Me.txtPersonalNumber.Location = New System.Drawing.Point(219, 372)
+        Me.txtPersonalNumber.Location = New System.Drawing.Point(219, 104)
         Me.txtPersonalNumber.Name = "txtPersonalNumber"
         Me.txtPersonalNumber.Size = New System.Drawing.Size(300, 26)
         Me.txtPersonalNumber.TabIndex = 10
         '
         'txtAddress
         '
-        Me.txtAddress.Location = New System.Drawing.Point(219, 291)
+        Me.txtAddress.Location = New System.Drawing.Point(219, 307)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(300, 26)
         Me.txtAddress.TabIndex = 11
@@ -176,7 +176,7 @@ Partial Class frmPatientAddEdit
         '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(219, 104)
+        Me.txtPhone.Location = New System.Drawing.Point(219, 376)
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.Size = New System.Drawing.Size(300, 26)
         Me.txtPhone.TabIndex = 13
@@ -194,7 +194,7 @@ Partial Class frmPatientAddEdit
         'dtpDob
         '
         Me.dtpDob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDob.Location = New System.Drawing.Point(219, 229)
+        Me.dtpDob.Location = New System.Drawing.Point(219, 236)
         Me.dtpDob.Name = "dtpDob"
         Me.dtpDob.Size = New System.Drawing.Size(300, 26)
         Me.dtpDob.TabIndex = 15
