@@ -69,8 +69,8 @@ Public Class frmPatientAddEdit
     End Sub
 
     Private Sub frmPatientAddEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        patientHandler.FillGendersComboBox(cbGender) ' fill combobox
-
+        patientHandler.FillGendersComboBox(cbGender, False) ' fill combobox
+        patientHandler.FillInsuranceComboBox(cbInsurance)
         If currentPatientId > 0 Then
             LoadPatient(currentPatientId)
         End If
@@ -84,6 +84,7 @@ Public Class frmPatientAddEdit
             Phone = mm.Phone
             GenderID = mm.GenderId
             Address = mm.Address
+            cbInsurance.SelectedValue = mm.InsuranceId
             Dob = mm.Dob
             PersonalNumber = mm.PersonalNumber
             Email = mm.Email
@@ -148,6 +149,7 @@ Public Class frmPatientAddEdit
         End If
 
         Dim GenderId As Integer = -1
+        Dim InsuranceId As Integer = -1
 
         If (cbGender.SelectedValue IsNot Nothing) Then
             GenderId = CInt(cbGender.SelectedValue)
@@ -156,11 +158,19 @@ Public Class frmPatientAddEdit
             Return
         End If
 
+        If (cbInsurance.SelectedValue IsNot Nothing) Then
+            InsuranceId = CInt(cbInsurance.SelectedValue)
+        Else
+            MessageBox.Show("სადაზღვეოს არჩევისას მოხდა შეცდომა", "შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         Dim patientData As New PatientsModel()
         patientData.ID = currentPatientId
         patientData.FullName = FullName
         patientData.Dob = Dob
         patientData.Email = Email
+        patientData.InsuranceId = InsuranceId
         patientData.GenderId = GenderId
         patientData.Phone = Phone
         patientData.Address = Address

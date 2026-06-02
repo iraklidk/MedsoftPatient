@@ -3,6 +3,7 @@
     Public Property FullName As String
     Public Property Dob As Date
     Public Property GenderId As Integer
+    Public Property InsuranceId As Integer
     Public Property Phone As String
     Public Property Address As String
     Public Property PersonalNumber As String

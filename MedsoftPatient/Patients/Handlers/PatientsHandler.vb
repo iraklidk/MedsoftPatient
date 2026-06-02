@@ -22,6 +22,7 @@ Public Class PatientsHandler
                 model.Address = dt.Rows(0)("Address").ToString()
                 model.PersonalNumber = dt.Rows(0)("PersonalNumber").ToString()
                 model.Email = dt.Rows(0)("Email").ToString()
+                model.InsuranceId = CInt(dt.Rows(0)("InsuranceID"))
             End If
 
         Catch ex As Exception
@@ -32,18 +33,35 @@ Public Class PatientsHandler
         Return model
     End Function
 
-    Public Sub FillGendersComboBox(ComboboxGenders As ComboBox)
+    Public Function GetPatientByIDPrint(PatientID As Integer) As dsPatientData
+        Dim ds As New dsPatientData()
+        Try
+            Using Sa As New SqlDataAdapter("dbo.PatientGetByIdPrint", connString)
+                Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.SelectCommand.Parameters.AddWithValue("@PatientId", PatientID)
+                Sa.TableMappings.Add("Table", "PatientData")
+                Sa.Fill(ds)
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"შეცდომა პაციენტის წაკითხვის დროს: {ex.Message}", "შეცდომა",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return ds
+    End Function
+
+    Public Sub FillGendersComboBox(ComboboxGenders As ComboBox, flag As Boolean)
         Dim dt As New DataTable()
         Try
             Using Sa As New SqlDataAdapter("dbo.GetGenderList", connString)
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
                 Sa.Fill(dt)
-                Dim row As DataRow = dt.NewRow()
-                row("GenderID") = 0
-                row("GenderName") = "ყველა"
+                If (flag) Then
+                    Dim row As DataRow = dt.NewRow()
+                    row("GenderID") = 0
+                    row("GenderName") = "ყველა"
+                    dt.Rows.InsertAt(row, 0)
+                End If
 
-                ' Insert at first position
-                dt.Rows.InsertAt(row, 0)
                 ComboboxGenders.DataSource = dt
                 ComboboxGenders.DisplayMember = "GenderName"
                 ComboboxGenders.ValueMember = "GenderID"
@@ -51,6 +69,23 @@ Public Class PatientsHandler
 
         Catch ex As Exception
             MessageBox.Show($"შეცდომა სქესების წაკითხვის დროს: {ex.Message}", "შეცდომა",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Sub FillInsuranceComboBox(ComboboxInsurance As ComboBox)
+        Dim dt As New DataTable()
+        Try
+            Using Sa As New SqlDataAdapter("dbo.GetInsuranceList", connString)
+                Sa.SelectCommand.CommandType = CommandType.StoredProcedure
+                Sa.Fill(dt)
+                ComboboxInsurance.DataSource = dt
+                ComboboxInsurance.DisplayMember = "InsuranceName"
+                ComboboxInsurance.ValueMember = "InsuranceID"
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show($"შეცდომა სადაზღვეოს წაკითხვის დროს: {ex.Message}", "შეცდომა",
                     MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -109,6 +144,7 @@ Public Class PatientsHandler
                 Sa.SelectCommand.Parameters.AddWithValue("@Address", model.Address)
                 Sa.SelectCommand.Parameters.AddWithValue("@PersonalNumber", model.PersonalNumber)
                 Sa.SelectCommand.Parameters.AddWithValue("@Email", model.Email)
+                Sa.SelectCommand.Parameters.AddWithValue("@InsuranceId", model.InsuranceId)
 
                 Dim statusParam As New SqlParameter("@StatusCode", SqlDbType.Int)
                 statusParam.Direction = ParameterDirection.Output
@@ -157,12 +193,12 @@ Public Class PatientsHandler
 
                 If Sa.Connection.State = ConnectionState.Closed Then Sa.Connection.Open()
                 Sa.ExecuteNonQuery()
-                Return True
+                Return 1
             End Using
 
         Catch ex As Exception
             MessageBox.Show("მოხდა შეცდომა" & ex.Message)
-            Return 1
+            Return -1
         End Try
     End Function
 

@@ -39,6 +39,8 @@ Partial Class frmPatientAddEdit
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.cbGender = New System.Windows.Forms.ComboBox()
         Me.dtpDob = New System.Windows.Forms.DateTimePicker()
+        Me.lblInsurance = New System.Windows.Forms.Label()
+        Me.cbInsurance = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,7 +57,7 @@ Partial Class frmPatientAddEdit
         'lbPhone
         '
         Me.lbPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbPhone.Location = New System.Drawing.Point(47, 358)
+        Me.lbPhone.Location = New System.Drawing.Point(46, 376)
         Me.lbPhone.Name = "lbPhone"
         Me.lbPhone.Size = New System.Drawing.Size(162, 60)
         Me.lbPhone.TabIndex = 2
@@ -65,7 +67,7 @@ Partial Class frmPatientAddEdit
         'lbGender
         '
         Me.lbGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbGender.Location = New System.Drawing.Point(49, 151)
+        Me.lbGender.Location = New System.Drawing.Point(53, 133)
         Me.lbGender.Name = "lbGender"
         Me.lbGender.Size = New System.Drawing.Size(160, 60)
         Me.lbGender.TabIndex = 3
@@ -75,7 +77,7 @@ Partial Class frmPatientAddEdit
         'lbDob
         '
         Me.lbDob.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbDob.Location = New System.Drawing.Point(47, 220)
+        Me.lbDob.Location = New System.Drawing.Point(47, 250)
         Me.lbDob.Name = "lbDob"
         Me.lbDob.Size = New System.Drawing.Size(162, 60)
         Me.lbDob.TabIndex = 4
@@ -85,7 +87,7 @@ Partial Class frmPatientAddEdit
         'lbAddress
         '
         Me.lbAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbAddress.Location = New System.Drawing.Point(48, 280)
+        Me.lbAddress.Location = New System.Drawing.Point(47, 307)
         Me.lbAddress.Name = "lbAddress"
         Me.lbAddress.Size = New System.Drawing.Size(161, 78)
         Me.lbAddress.TabIndex = 5
@@ -162,7 +164,7 @@ Partial Class frmPatientAddEdit
         '
         'txtAddress
         '
-        Me.txtAddress.Location = New System.Drawing.Point(219, 307)
+        Me.txtAddress.Location = New System.Drawing.Point(219, 334)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(300, 26)
         Me.txtAddress.TabIndex = 11
@@ -176,7 +178,7 @@ Partial Class frmPatientAddEdit
         '
         'txtPhone
         '
-        Me.txtPhone.Location = New System.Drawing.Point(219, 376)
+        Me.txtPhone.Location = New System.Drawing.Point(219, 394)
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.Size = New System.Drawing.Size(300, 26)
         Me.txtPhone.TabIndex = 13
@@ -186,24 +188,49 @@ Partial Class frmPatientAddEdit
         Me.cbGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGender.FormattingEnabled = True
         Me.cbGender.Items.AddRange(New Object() {"მდედრობითი", "მამრობითი"})
-        Me.cbGender.Location = New System.Drawing.Point(219, 164)
+        Me.cbGender.Location = New System.Drawing.Point(219, 146)
         Me.cbGender.Name = "cbGender"
         Me.cbGender.Size = New System.Drawing.Size(300, 28)
         Me.cbGender.TabIndex = 14
         '
         'dtpDob
         '
+        Me.dtpDob.CalendarFont = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDob.CustomFormat = "dd.MM.yyyy"
         Me.dtpDob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDob.Location = New System.Drawing.Point(219, 236)
+        Me.dtpDob.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDob.Location = New System.Drawing.Point(219, 266)
         Me.dtpDob.Name = "dtpDob"
         Me.dtpDob.Size = New System.Drawing.Size(300, 26)
         Me.dtpDob.TabIndex = 15
+        '
+        'lblInsurance
+        '
+        Me.lblInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInsurance.Location = New System.Drawing.Point(46, 193)
+        Me.lblInsurance.Name = "lblInsurance"
+        Me.lblInsurance.Size = New System.Drawing.Size(162, 60)
+        Me.lblInsurance.TabIndex = 16
+        Me.lblInsurance.Text = "სადაზღვეო"
+        Me.lblInsurance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cbInsurance
+        '
+        Me.cbInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbInsurance.FormattingEnabled = True
+        Me.cbInsurance.Items.AddRange(New Object() {"მდედრობითი", "მამრობითი"})
+        Me.cbInsurance.Location = New System.Drawing.Point(219, 211)
+        Me.cbInsurance.Name = "cbInsurance"
+        Me.cbInsurance.Size = New System.Drawing.Size(300, 28)
+        Me.cbInsurance.TabIndex = 17
         '
         'frmPatientAddEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(603, 584)
+        Me.Controls.Add(Me.cbInsurance)
+        Me.Controls.Add(Me.lblInsurance)
         Me.Controls.Add(Me.dtpDob)
         Me.Controls.Add(Me.cbGender)
         Me.Controls.Add(Me.txtPhone)
@@ -245,4 +272,6 @@ Partial Class frmPatientAddEdit
     Friend WithEvents txtPhone As TextBox
     Friend WithEvents cbGender As ComboBox
     Friend WithEvents dtpDob As DateTimePicker
+    Friend WithEvents lblInsurance As Label
+    Friend WithEvents cbInsurance As ComboBox
 End Class

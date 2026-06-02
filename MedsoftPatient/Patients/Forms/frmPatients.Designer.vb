@@ -38,6 +38,7 @@ Partial Class frmPatients
         Me.colAddress = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colPersonalNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colMail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colInsurance = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.lblId = New System.Windows.Forms.Label()
         Me.lblFullname = New System.Windows.Forms.Label()
         Me.lblAddress = New System.Windows.Forms.Label()
@@ -75,7 +76,7 @@ Partial Class frmPatients
         Me.tsAdd.Image = Global.MedsoftPatient.My.Resources.Resources.aAdd
         Me.tsAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsAdd.Name = "tsAdd"
-        Me.tsAdd.Size = New System.Drawing.Size(136, 94)
+        Me.tsAdd.Size = New System.Drawing.Size(136, 36)
         Me.tsAdd.Text = "დამატება"
         '
         'tsEdit
@@ -84,7 +85,7 @@ Partial Class frmPatients
         Me.tsEdit.Image = Global.MedsoftPatient.My.Resources.Resources.aEdit
         Me.tsEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsEdit.Name = "tsEdit"
-        Me.tsEdit.Size = New System.Drawing.Size(174, 94)
+        Me.tsEdit.Size = New System.Drawing.Size(174, 36)
         Me.tsEdit.Text = "რედაქტირება"
         '
         'tsDelete
@@ -93,7 +94,7 @@ Partial Class frmPatients
         Me.tsDelete.Image = Global.MedsoftPatient.My.Resources.Resources.aDelete
         Me.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsDelete.Name = "tsDelete"
-        Me.tsDelete.Size = New System.Drawing.Size(105, 94)
+        Me.tsDelete.Size = New System.Drawing.Size(105, 36)
         Me.tsDelete.Text = "წაშლა"
         '
         'tsPrint
@@ -102,7 +103,7 @@ Partial Class frmPatients
         Me.tsPrint.Image = Global.MedsoftPatient.My.Resources.Resources.aPrint
         Me.tsPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsPrint.Name = "tsPrint"
-        Me.tsPrint.Size = New System.Drawing.Size(114, 94)
+        Me.tsPrint.Size = New System.Drawing.Size(114, 36)
         Me.tsPrint.Text = "ბეჭდვა"
         '
         'tsExport
@@ -111,7 +112,7 @@ Partial Class frmPatients
         Me.tsExport.Image = Global.MedsoftPatient.My.Resources.Resources.aExcel
         Me.tsExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsExport.Name = "tsExport"
-        Me.tsExport.Size = New System.Drawing.Size(140, 94)
+        Me.tsExport.Size = New System.Drawing.Size(140, 36)
         Me.tsExport.Text = "ექსპორტი"
         '
         'gcPatients
@@ -184,7 +185,7 @@ Partial Class frmPatients
         Me.gvPatients.Appearance.VertLine.Options.UseFont = True
         Me.gvPatients.Appearance.ViewCaption.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gvPatients.Appearance.ViewCaption.Options.UseFont = True
-        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colId, Me.colFullname, Me.colDob, Me.colGender, Me.colPhone, Me.colAddress, Me.colPersonalNumber, Me.colMail})
+        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colId, Me.colFullname, Me.colDob, Me.colGender, Me.colPhone, Me.colAddress, Me.colPersonalNumber, Me.colMail, Me.colInsurance})
         Me.gvPatients.DetailHeight = 455
         Me.gvPatients.GridControl = Me.gcPatients
         Me.gvPatients.Name = "gvPatients"
@@ -218,6 +219,8 @@ Partial Class frmPatients
         'colDob
         '
         Me.colDob.Caption = "დაბ. დღე"
+        Me.colDob.DisplayFormat.FormatString = "dd.MM.yyyy"
+        Me.colDob.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.colDob.FieldName = "Dob"
         Me.colDob.MinWidth = 40
         Me.colDob.Name = "colDob"
@@ -280,6 +283,16 @@ Partial Class frmPatients
         Me.colMail.Visible = True
         Me.colMail.VisibleIndex = 7
         Me.colMail.Width = 164
+        '
+        'colInsurance
+        '
+        Me.colInsurance.Caption = " სადაზღვეო"
+        Me.colInsurance.FieldName = "InsuranceName"
+        Me.colInsurance.MinWidth = 30
+        Me.colInsurance.Name = "colInsurance"
+        Me.colInsurance.Visible = True
+        Me.colInsurance.VisibleIndex = 8
+        Me.colInsurance.Width = 112
         '
         'lblId
         '
@@ -507,4 +520,5 @@ Partial Class frmPatients
     Friend WithEvents cbGender As ComboBox
     Friend WithEvents lblGender As Label
     Friend WithEvents btnClear As Button
+    Friend WithEvents colInsurance As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -1,11 +1,14 @@
-﻿Public Class frmPatients
+﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports DevExpress.XtraReports.UI
+
+Public Class frmPatients
 
     Dim handler As New PatientsHandler()
 
     Private Sub frmPatients_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         gcPatients.DataSource = handler.GetPatients()
         gvPatients.BestFitColumns()
-        handler.FillGendersComboBox(cbGender)
+        handler.FillGendersComboBox(cbGender, True)
         handler.FillStatusComboBox(cbStatus)
     End Sub
 
@@ -36,9 +39,12 @@
                 End If
 
                 Dim rowsAffected As Integer = handler.DeletePatientsList(dtIdList)
-
-                If rowsAffected <> 0 And rowsAffected <> 1 Then     ' BUG
-                    gcPatients.DataSource = handler.GetPatients()
+                If rowsAffected > 0 Then     ' BUG
+                    Dim patientId As Integer
+                    If Not Integer.TryParse(txtId.Text, patientId) Then
+                        patientId = 0
+                    End If
+                    gcPatients.DataSource = handler.GetPatients(patientId, cbStatus.SelectedValue, txtFullname.Text, txtPersonalNumber.Text, txtAddress.Text, cbGender.SelectedValue)
                     MessageBox.Show("ჩანაწერი წარმატებით წაიშალა.", "შეტყობინება", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show("ჩანაწერი არ მოიძებნა ან წაშლა ვერ მოხერხდა.", "შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -115,5 +121,14 @@
         txtFullname.Clear()
         cbGender.SelectedValue = 0
         cbStatus.SelectedValue = 2
+    End Sub
+
+    Private Sub tsPrint_Click(sender As Object, e As EventArgs) Handles tsPrint.Click
+        Dim selectedRowsHandles As Integer = gvPatients.GetFocusedRowCellValue(colId)
+        Dim dt As dsPatientData = handler.GetPatientByIDPrint(selectedRowsHandles)
+
+        Dim Report As New XtraPatientPrint()
+        Report.DataSource = dt
+        Report.ShowRibbonPreviewDialog()
     End Sub
 End Class

@@ -49,14 +49,26 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v21.2.Export, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v21.2.UI, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v21.2.Core, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v21.2.Extensions, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -83,13 +95,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataConnection\Db.vb" />
-    <Compile Include="Patients\Dataset\dsPatients.vb">
-      <DependentUpon>dsPatients.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Patients\Dataset\dsPatients1.Designer.vb">
+    <Compile Include="Patients\Dataset\dsPatientData.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dsPatients.xsd</DependentUpon>
+      <DependentUpon>dsPatientData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Patients\Dataset\dsPatientData.vb">
+      <DependentUpon>dsPatientData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Patients\Forms\frmPatientAddEdit.Designer.vb">
       <DependentUpon>frmPatientAddEdit.vb</DependentUpon>
@@ -121,6 +133,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Patients\Print\XtraPatientPrint.Designer.vb">
+      <DependentUpon>XtraPatientPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Patients\Print\XtraPatientPrint.vb">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Patients\Forms\frmPatientAddEdit.resx">
@@ -136,6 +154,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Patients\Print\XtraPatientPrint.resx">
+      <DependentUpon>XtraPatientPrint.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -150,16 +171,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Patients\Dataset\dsPatients.xsc">
-      <DependentUpon>dsPatients.xsd</DependentUpon>
+    <None Include="Patients\Dataset\dsPatientData.xsc">
+      <DependentUpon>dsPatientData.xsd</DependentUpon>
     </None>
-    <None Include="Patients\Dataset\dsPatients.xsd">
+    <None Include="Patients\Dataset\dsPatientData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsPatients1.Designer.vb</LastGenOutput>
+      <LastGenOutput>dsPatientData.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Patients\Dataset\dsPatients.xss">
-      <DependentUpon>dsPatients.xsd</DependentUpon>
+    <None Include="Patients\Dataset\dsPatientData.xss">
+      <DependentUpon>dsPatientData.xsd</DependentUpon>
     </None>
     <None Include="Resources\aAdd.png" />
   </ItemGroup>
@@ -188,8 +209,11 @@
     <None Include="Resources\aTop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Patients\Print\" />
-    <Folder Include="Services\" />
+    <Folder Include="Services\Dataset\" />
+    <Folder Include="Services\Forms\" />
+    <Folder Include="Services\Handlers\" />
+    <Folder Include="Services\Models\" />
+    <Folder Include="Services\Print\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
