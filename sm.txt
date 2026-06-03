@@ -1,0 +1,135 @@
+ALTER procedure [dbo].[GetGenderList]
+as
+begin
+	set nocount on
+	select * from gender
+end
+
+ALTER procedure [dbo].[GetInsuranceList]
+as
+begin
+	set nocount on
+	select * from Insurance
+end
+
+ALTER PROCEDURE [dbo].[PatientDelete]
+    @IDlist dbo.IDList READONLY
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE Patient
+    SET status = 0
+    WHERE ID IN (SELECT ID FROM @IDlist);
+END
+
+ALTER procedure [dbo].[PatientGetById]
+	@PatientId int
+as
+begin
+	set nocount on
+
+	select * from patient
+	where patient.ID = @PatientId
+end
+
+ALTER procedure [dbo].[PatientGetByIdPrint]
+    @PatientId int
+as
+begin 
+    set nocount on;
+
+    -- First result set
+    select 
+        p.FullName,
+        p.Dob,
+        p.Phone,
+        p.Address,
+        p.PersonalNumber,
+        p.Email,
+        datediff(year, Dob, GETDATE()) as Age,
+        g.GenderName
+    from Patient p
+    join gender g on p.GenderID = g.GenderID
+    where ID = @PatientId
+
+    -- Second result set
+    select *
+    from Patient
+end
+
+ALTER PROCEDURE [dbo].[PatientListGet]
+    @PatientID INT = 0,
+    @Gender INT = 0,
+    @ActiveStatus INT = 1,
+    @FullName NVARCHAR(200) = NULL,
+    @PersonalNumber NVARCHAR(50) = NULL,
+    @Address NVARCHAR(200) = NULL
+AS
+BEGIN
+    SELECT * FROM Patient p
+    JOIN Gender g ON g.GenderID = p.GenderID
+    left JOIN Insurance i on i.InsuranceId = p.InsuranceID
+    WHERE
+        (@PatientID = 0 OR p.ID = @PatientID)
+        AND (@Gender = 0 OR p.GenderID = @Gender)
+        AND (@ActiveStatus = 2 OR p.Status = @ActiveStatus)
+        AND (@FullName IS NULL OR p.FullName LIKE '%' + @FullName + '%')
+        AND (@PersonalNumber IS NULL OR p.PersonalNumber LIKE '%' + @PersonalNumber + '%')
+        AND (@Address IS NULL OR p.Address LIKE '%' + @Address + '%')
+END
+
+ALTER procedure [dbo].[UpdatePatient]
+    @ID INT = NULL, 
+    @FullName NVARCHAR(50),
+    @Dob DATE,
+    @GenderID INT,
+    @InsuranceID INT,
+    @Phone NVARCHAR(20),
+    @Address NVARCHAR(50),
+    @PersonalNumber NVARCHAR(50),
+    @Email NVARCHAR(50),
+    @StatusCode INT OUTPUT
+as
+begin
+	set nocount on
+
+    BEGIN TRY
+        IF EXISTS (SELECT 1 FROM Patient WHERE PersonalNumber = @PersonalNumber
+              AND (@ID IS NULL OR ID <> @ID))
+        BEGIN
+            SET @StatusCode = 0;
+            RETURN;
+        END
+
+        IF @ID IS NULL OR @ID = 0
+        BEGIN
+            INSERT INTO Patient
+            (FullName, Dob, InsuranceID, GenderID, Phone, Address, PersonalNumber, Email)
+            VALUES
+            (@FullName, @Dob, @InsuranceID, @GenderID, @Phone, @Address, @PersonalNumber, @Email);
+
+            SET @StatusCode = 1;
+        END
+        ELSE
+        BEGIN
+            UPDATE Patient
+            SET 
+                FullName = @FullName,
+                Dob = @Dob,
+                GenderID = @GenderID,
+                Phone = @Phone,
+                InsuranceID = @InsuranceID,
+                Address = @Address,
+                PersonalNumber = @PersonalNumber,
+                Email = @Email
+            WHERE ID = @ID;
+
+            SET @StatusCode = 2;
+        END
+
+    END TRY
+    BEGIN CATCH
+        SET @StatusCode = -2;
+    END CATCH
+END
