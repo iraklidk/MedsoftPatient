@@ -22,7 +22,7 @@ Public Class PatientsHandler
                 model.Address = dt.Rows(0)("Address").ToString()
                 model.PersonalNumber = dt.Rows(0)("PersonalNumber").ToString()
                 model.Email = dt.Rows(0)("Email").ToString()
-                model.InsuranceId = CInt(dt.Rows(0)("InsuranceID"))
+                model.InsuranceId = If(IsDBNull(dt.Rows(0)("InsuranceId")), 0, Convert.ToInt32(dt.Rows(0)("InsuranceId")))
             End If
 
         Catch ex As Exception
