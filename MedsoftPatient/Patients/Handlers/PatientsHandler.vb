@@ -33,13 +33,15 @@ Public Class PatientsHandler
         Return model
     End Function
 
-    Public Function GetPatientByIDPrint(PatientID As Integer) As dsPatientData
-        Dim ds As New dsPatientData()
+    Public Function GetPatientByIDPrint(PatientID As Integer, Optional TopX As Integer = 3) As dsPatientDataDetail
+        Dim ds As New dsPatientDataDetail()
         Try
-            Using Sa As New SqlDataAdapter("dbo.PatientGetByIdPrint", connString)
+            Using Sa As New SqlDataAdapter("dbo.PatientPrint", connString)
                 Sa.SelectCommand.CommandType = CommandType.StoredProcedure
                 Sa.SelectCommand.Parameters.AddWithValue("@PatientId", PatientID)
+                Sa.SelectCommand.Parameters.AddWithValue("@TopX", TopX)
                 Sa.TableMappings.Add("Table", "PatientData")
+                Sa.TableMappings.Add("Table1", "TopXPatients")
                 Sa.Fill(ds)
             End Using
         Catch ex As Exception

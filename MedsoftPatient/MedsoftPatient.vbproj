@@ -95,13 +95,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataConnection\Db.vb" />
-    <Compile Include="Patients\Dataset\dsPatientData.Designer.vb">
+    <Compile Include="Patients\Dataset\dsPatientDataDetail.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dsPatientData.xsd</DependentUpon>
+      <DependentUpon>dsPatientDataDetail.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Patients\Dataset\dsPatientData.vb">
-      <DependentUpon>dsPatientData.xsd</DependentUpon>
+    <Compile Include="Patients\Dataset\dsPatientDataDetail.vb">
+      <DependentUpon>dsPatientDataDetail.xsd</DependentUpon>
     </Compile>
     <Compile Include="Patients\Forms\frmPatientAddEdit.Designer.vb">
       <DependentUpon>frmPatientAddEdit.vb</DependentUpon>
@@ -139,6 +139,12 @@
     <Compile Include="Patients\Print\XtraPatientPrint.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Patients\Print\XtraPatientPrintDetail.Designer.vb">
+      <DependentUpon>XtraPatientPrintDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Patients\Print\XtraPatientPrintDetail.vb">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Patients\Forms\frmPatientAddEdit.resx">
@@ -157,6 +163,9 @@
     <EmbeddedResource Include="Patients\Print\XtraPatientPrint.resx">
       <DependentUpon>XtraPatientPrint.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Patients\Print\XtraPatientPrintDetail.resx">
+      <DependentUpon>XtraPatientPrintDetail.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -171,16 +180,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Patients\Dataset\dsPatientData.xsc">
-      <DependentUpon>dsPatientData.xsd</DependentUpon>
+    <None Include="Patients\Dataset\dsPatientDataDetail.xsc">
+      <DependentUpon>dsPatientDataDetail.xsd</DependentUpon>
     </None>
-    <None Include="Patients\Dataset\dsPatientData.xsd">
+    <None Include="Patients\Dataset\dsPatientDataDetail.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsPatientData.Designer.vb</LastGenOutput>
+      <LastGenOutput>dsPatientDataDetail.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Patients\Dataset\dsPatientData.xss">
-      <DependentUpon>dsPatientData.xsd</DependentUpon>
+    <None Include="Patients\Dataset\dsPatientDataDetail.xss">
+      <DependentUpon>dsPatientDataDetail.xsd</DependentUpon>
     </None>
     <None Include="Resources\aAdd.png" />
   </ItemGroup>

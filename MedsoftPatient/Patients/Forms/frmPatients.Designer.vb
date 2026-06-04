@@ -27,6 +27,7 @@ Partial Class frmPatients
         Me.tsEdit = New System.Windows.Forms.ToolStripButton()
         Me.tsDelete = New System.Windows.Forms.ToolStripButton()
         Me.tsPrint = New System.Windows.Forms.ToolStripButton()
+        Me.tsPrintDetail = New System.Windows.Forms.ToolStripButton()
         Me.tsExport = New System.Windows.Forms.ToolStripButton()
         Me.gcPatients = New DevExpress.XtraGrid.GridControl()
         Me.gvPatients = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -63,10 +64,10 @@ Partial Class frmPatients
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsAdd, Me.tsEdit, Me.tsDelete, Me.tsPrint, Me.tsExport})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsAdd, Me.tsEdit, Me.tsDelete, Me.tsPrint, Me.tsPrintDetail, Me.tsExport})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1304, 41)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1310, 39)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -76,7 +77,7 @@ Partial Class frmPatients
         Me.tsAdd.Image = Global.MedsoftPatient.My.Resources.Resources.aAdd
         Me.tsAdd.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsAdd.Name = "tsAdd"
-        Me.tsAdd.Size = New System.Drawing.Size(136, 36)
+        Me.tsAdd.Size = New System.Drawing.Size(105, 36)
         Me.tsAdd.Text = "დამატება"
         '
         'tsEdit
@@ -85,7 +86,7 @@ Partial Class frmPatients
         Me.tsEdit.Image = Global.MedsoftPatient.My.Resources.Resources.aEdit
         Me.tsEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsEdit.Name = "tsEdit"
-        Me.tsEdit.Size = New System.Drawing.Size(174, 36)
+        Me.tsEdit.Size = New System.Drawing.Size(131, 36)
         Me.tsEdit.Text = "რედაქტირება"
         '
         'tsDelete
@@ -94,7 +95,7 @@ Partial Class frmPatients
         Me.tsDelete.Image = Global.MedsoftPatient.My.Resources.Resources.aDelete
         Me.tsDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsDelete.Name = "tsDelete"
-        Me.tsDelete.Size = New System.Drawing.Size(105, 36)
+        Me.tsDelete.Size = New System.Drawing.Size(83, 36)
         Me.tsDelete.Text = "წაშლა"
         '
         'tsPrint
@@ -103,8 +104,17 @@ Partial Class frmPatients
         Me.tsPrint.Image = Global.MedsoftPatient.My.Resources.Resources.aPrint
         Me.tsPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsPrint.Name = "tsPrint"
-        Me.tsPrint.Size = New System.Drawing.Size(114, 36)
+        Me.tsPrint.Size = New System.Drawing.Size(91, 36)
         Me.tsPrint.Text = "ბეჭდვა"
+        '
+        'tsPrintDetail
+        '
+        Me.tsPrintDetail.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tsPrintDetail.Image = Global.MedsoftPatient.My.Resources.Resources.aPrint
+        Me.tsPrintDetail.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsPrintDetail.Name = "tsPrintDetail"
+        Me.tsPrintDetail.Size = New System.Drawing.Size(170, 36)
+        Me.tsPrintDetail.Text = "დეტალური ბეჭდვა"
         '
         'tsExport
         '
@@ -112,18 +122,18 @@ Partial Class frmPatients
         Me.tsExport.Image = Global.MedsoftPatient.My.Resources.Resources.aExcel
         Me.tsExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsExport.Name = "tsExport"
-        Me.tsExport.Size = New System.Drawing.Size(140, 36)
+        Me.tsExport.Size = New System.Drawing.Size(108, 36)
         Me.tsExport.Text = "ექსპორტი"
         '
         'gcPatients
         '
         Me.gcPatients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gcPatients.EmbeddedNavigator.Margin = New System.Windows.Forms.Padding(4)
-        Me.gcPatients.Location = New System.Drawing.Point(0, 221)
+        Me.gcPatients.Location = New System.Drawing.Point(0, 219)
         Me.gcPatients.MainView = Me.gvPatients
         Me.gcPatients.Margin = New System.Windows.Forms.Padding(4)
         Me.gcPatients.Name = "gcPatients"
-        Me.gcPatients.Size = New System.Drawing.Size(1304, 400)
+        Me.gcPatients.Size = New System.Drawing.Size(1310, 402)
         Me.gcPatients.TabIndex = 0
         Me.gcPatients.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvPatients})
         '
@@ -301,7 +311,7 @@ Partial Class frmPatients
         Me.lblId.Location = New System.Drawing.Point(13, 12)
         Me.lblId.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblId.Name = "lblId"
-        Me.lblId.Size = New System.Drawing.Size(141, 26)
+        Me.lblId.Size = New System.Drawing.Size(99, 18)
         Me.lblId.TabIndex = 1
         Me.lblId.Text = "პაციენტის ID:"
         '
@@ -312,7 +322,7 @@ Partial Class frmPatients
         Me.lblFullname.Location = New System.Drawing.Point(13, 91)
         Me.lblFullname.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFullname.Name = "lblFullname"
-        Me.lblFullname.Size = New System.Drawing.Size(150, 26)
+        Me.lblFullname.Size = New System.Drawing.Size(105, 18)
         Me.lblFullname.TabIndex = 2
         Me.lblFullname.Text = "სახელი, გვარი:"
         '
@@ -323,7 +333,7 @@ Partial Class frmPatients
         Me.lblAddress.Location = New System.Drawing.Point(667, 91)
         Me.lblAddress.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAddress.Name = "lblAddress"
-        Me.lblAddress.Size = New System.Drawing.Size(118, 26)
+        Me.lblAddress.Size = New System.Drawing.Size(82, 18)
         Me.lblAddress.TabIndex = 3
         Me.lblAddress.Text = "მისამართი:"
         '
@@ -334,7 +344,7 @@ Partial Class frmPatients
         Me.lblStatus.Location = New System.Drawing.Point(334, 12)
         Me.lblStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(102, 26)
+        Me.lblStatus.Size = New System.Drawing.Size(70, 18)
         Me.lblStatus.TabIndex = 4
         Me.lblStatus.Text = "სტატუსი:"
         '
@@ -367,10 +377,10 @@ Partial Class frmPatients
         Me.Panel1.Controls.Add(Me.lblId)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(0, 41)
+        Me.Panel1.Location = New System.Drawing.Point(0, 39)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1304, 180)
+        Me.Panel1.Size = New System.Drawing.Size(1310, 180)
         Me.Panel1.TabIndex = 2
         '
         'btnClear
@@ -391,7 +401,7 @@ Partial Class frmPatients
         Me.cbGender.Location = New System.Drawing.Point(672, 42)
         Me.cbGender.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGender.Name = "cbGender"
-        Me.cbGender.Size = New System.Drawing.Size(276, 34)
+        Me.cbGender.Size = New System.Drawing.Size(276, 26)
         Me.cbGender.TabIndex = 13
         '
         'lblGender
@@ -401,7 +411,7 @@ Partial Class frmPatients
         Me.lblGender.Location = New System.Drawing.Point(667, 12)
         Me.lblGender.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGender.Name = "lblGender"
-        Me.lblGender.Size = New System.Drawing.Size(66, 26)
+        Me.lblGender.Size = New System.Drawing.Size(47, 18)
         Me.lblGender.TabIndex = 12
         Me.lblGender.Text = "სქესი:"
         '
@@ -412,7 +422,7 @@ Partial Class frmPatients
         Me.cbStatus.Location = New System.Drawing.Point(339, 42)
         Me.cbStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cbStatus.Name = "cbStatus"
-        Me.cbStatus.Size = New System.Drawing.Size(276, 34)
+        Me.cbStatus.Size = New System.Drawing.Size(276, 26)
         Me.cbStatus.TabIndex = 11
         '
         'lblPersonalNumber
@@ -422,7 +432,7 @@ Partial Class frmPatients
         Me.lblPersonalNumber.Location = New System.Drawing.Point(334, 91)
         Me.lblPersonalNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPersonalNumber.Name = "lblPersonalNumber"
-        Me.lblPersonalNumber.Size = New System.Drawing.Size(162, 26)
+        Me.lblPersonalNumber.Size = New System.Drawing.Size(114, 18)
         Me.lblPersonalNumber.TabIndex = 10
         Me.lblPersonalNumber.Text = "პირადი ნომერი:"
         '
@@ -432,7 +442,7 @@ Partial Class frmPatients
         Me.txtPersonalNumber.Location = New System.Drawing.Point(339, 121)
         Me.txtPersonalNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPersonalNumber.Name = "txtPersonalNumber"
-        Me.txtPersonalNumber.Size = New System.Drawing.Size(276, 34)
+        Me.txtPersonalNumber.Size = New System.Drawing.Size(276, 25)
         Me.txtPersonalNumber.TabIndex = 9
         '
         'txtFullname
@@ -441,7 +451,7 @@ Partial Class frmPatients
         Me.txtFullname.Location = New System.Drawing.Point(18, 121)
         Me.txtFullname.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFullname.Name = "txtFullname"
-        Me.txtFullname.Size = New System.Drawing.Size(276, 34)
+        Me.txtFullname.Size = New System.Drawing.Size(276, 25)
         Me.txtFullname.TabIndex = 8
         '
         'txtAddress
@@ -450,7 +460,7 @@ Partial Class frmPatients
         Me.txtAddress.Location = New System.Drawing.Point(672, 121)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(276, 34)
+        Me.txtAddress.Size = New System.Drawing.Size(276, 25)
         Me.txtAddress.TabIndex = 7
         '
         'txtId
@@ -459,14 +469,14 @@ Partial Class frmPatients
         Me.txtId.Location = New System.Drawing.Point(13, 42)
         Me.txtId.Margin = New System.Windows.Forms.Padding(4)
         Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(276, 34)
+        Me.txtId.Size = New System.Drawing.Size(276, 25)
         Me.txtId.TabIndex = 6
         '
         'frmPatients
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 26.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1304, 621)
+        Me.ClientSize = New System.Drawing.Size(1310, 621)
         Me.Controls.Add(Me.gcPatients)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip1)
@@ -503,7 +513,7 @@ Partial Class frmPatients
     Friend WithEvents colMail As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colId As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents colGender As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents tsPrint As ToolStripButton
+    Friend WithEvents tsPrintDetail As ToolStripButton
     Friend WithEvents tsExport As ToolStripButton
     Friend WithEvents lblId As Label
     Friend WithEvents lblFullname As Label
@@ -521,4 +531,5 @@ Partial Class frmPatients
     Friend WithEvents lblGender As Label
     Friend WithEvents btnClear As Button
     Friend WithEvents colInsurance As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents tsPrint As ToolStripButton
 End Class

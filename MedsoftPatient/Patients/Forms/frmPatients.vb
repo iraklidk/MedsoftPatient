@@ -125,9 +125,16 @@ Public Class frmPatients
 
     Private Sub tsPrint_Click(sender As Object, e As EventArgs) Handles tsPrint.Click
         Dim selectedRowsHandles As Integer = gvPatients.GetFocusedRowCellValue(colId)
-        Dim dt As dsPatientData = handler.GetPatientByIDPrint(selectedRowsHandles)
-
+        Dim dt As dsPatientDataDetail = handler.GetPatientByIDPrint(selectedRowsHandles)
         Dim Report As New XtraPatientPrint()
+        Report.DataSource = dt
+        Report.ShowRibbonPreviewDialog()
+    End Sub
+
+    Private Sub tsPrintDetail_Click(sender As Object, e As EventArgs) Handles tsPrintDetail.Click
+        Dim selectedRowsHandles As Integer = gvPatients.GetFocusedRowCellValue(colId)
+        Dim dt As dsPatientDataDetail = handler.GetPatientByIDPrint(selectedRowsHandles)
+        Dim Report As New XtraPatientPrintDetail()
         Report.DataSource = dt
         Report.ShowRibbonPreviewDialog()
     End Sub
