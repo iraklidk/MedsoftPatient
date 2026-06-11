@@ -22,6 +22,17 @@ Partial Class frmPatients
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim GridFormatRule1 As DevExpress.XtraGrid.GridFormatRule = New DevExpress.XtraGrid.GridFormatRule()
+        Dim FormatConditionRuleIconSet1 As DevExpress.XtraEditors.FormatConditionRuleIconSet = New DevExpress.XtraEditors.FormatConditionRuleIconSet()
+        Dim FormatConditionIconSet1 As DevExpress.XtraEditors.FormatConditionIconSet = New DevExpress.XtraEditors.FormatConditionIconSet()
+        Dim FormatConditionIconSetIcon1 As DevExpress.XtraEditors.FormatConditionIconSetIcon = New DevExpress.XtraEditors.FormatConditionIconSetIcon()
+        Dim FormatConditionIconSetIcon2 As DevExpress.XtraEditors.FormatConditionIconSetIcon = New DevExpress.XtraEditors.FormatConditionIconSetIcon()
+        Dim FormatConditionIconSetIcon3 As DevExpress.XtraEditors.FormatConditionIconSetIcon = New DevExpress.XtraEditors.FormatConditionIconSetIcon()
+        Dim GridFormatRule2 As DevExpress.XtraGrid.GridFormatRule = New DevExpress.XtraGrid.GridFormatRule()
+        Dim FormatConditionRuleExpression1 As DevExpress.XtraEditors.FormatConditionRuleExpression = New DevExpress.XtraEditors.FormatConditionRuleExpression()
+        Me.colGenderId = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colGender = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colDob = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tsAdd = New System.Windows.Forms.ToolStripButton()
         Me.tsEdit = New System.Windows.Forms.ToolStripButton()
@@ -33,13 +44,15 @@ Partial Class frmPatients
         Me.gvPatients = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.colId = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colFullname = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.colDob = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.colGender = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAge = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colPhone = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colAddress = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colPersonalNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colMail = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.colInsurance = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.colAddressEmail = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.lblId = New System.Windows.Forms.Label()
         Me.lblFullname = New System.Windows.Forms.Label()
         Me.lblAddress = New System.Windows.Forms.Label()
@@ -58,8 +71,39 @@ Partial Class frmPatients
         Me.ToolStrip1.SuspendLayout()
         CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'colGenderId
+        '
+        Me.colGenderId.FieldName = "GenderID"
+        Me.colGenderId.Name = "colGenderId"
+        '
+        'colGender
+        '
+        Me.colGender.Caption = "სქესი"
+        Me.colGender.FieldName = "GenderName"
+        Me.colGender.MinWidth = 40
+        Me.colGender.Name = "colGender"
+        Me.colGender.OptionsColumn.AllowEdit = False
+        Me.colGender.Visible = True
+        Me.colGender.VisibleIndex = 4
+        Me.colGender.Width = 136
+        '
+        'colDob
+        '
+        Me.colDob.Caption = "დაბ. დღე"
+        Me.colDob.DisplayFormat.FormatString = "dd.MM.yyyy"
+        Me.colDob.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.colDob.FieldName = "Dob"
+        Me.colDob.MinWidth = 40
+        Me.colDob.Name = "colDob"
+        Me.colDob.OptionsColumn.AllowEdit = False
+        Me.colDob.Visible = True
+        Me.colDob.VisibleIndex = 2
+        Me.colDob.Width = 131
         '
         'ToolStrip1
         '
@@ -67,7 +111,7 @@ Partial Class frmPatients
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsAdd, Me.tsEdit, Me.tsDelete, Me.tsPrint, Me.tsPrintDetail, Me.tsExport})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(1310, 39)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1349, 39)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -133,7 +177,8 @@ Partial Class frmPatients
         Me.gcPatients.MainView = Me.gvPatients
         Me.gcPatients.Margin = New System.Windows.Forms.Padding(4)
         Me.gcPatients.Name = "gcPatients"
-        Me.gcPatients.Size = New System.Drawing.Size(1310, 402)
+        Me.gcPatients.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemMemoEdit1})
+        Me.gcPatients.Size = New System.Drawing.Size(1349, 402)
         Me.gcPatients.TabIndex = 0
         Me.gcPatients.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.gvPatients})
         '
@@ -195,14 +240,48 @@ Partial Class frmPatients
         Me.gvPatients.Appearance.VertLine.Options.UseFont = True
         Me.gvPatients.Appearance.ViewCaption.Font = New System.Drawing.Font("Sylfaen", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gvPatients.Appearance.ViewCaption.Options.UseFont = True
-        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colId, Me.colFullname, Me.colDob, Me.colGender, Me.colPhone, Me.colAddress, Me.colPersonalNumber, Me.colMail, Me.colInsurance})
+        Me.gvPatients.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.colId, Me.colFullname, Me.colDob, Me.colAge, Me.colGender, Me.colPhone, Me.colAddress, Me.colPersonalNumber, Me.colMail, Me.colInsurance, Me.colAddressEmail, Me.colGenderId})
         Me.gvPatients.DetailHeight = 455
+        GridFormatRule1.Column = Me.colGenderId
+        GridFormatRule1.ColumnApplyTo = Me.colGender
+        GridFormatRule1.Name = "FormatGender"
+        FormatConditionIconSet1.CategoryName = "Shapes"
+        FormatConditionIconSetIcon1.PredefinedName = "TrafficLights23_1.png"
+        FormatConditionIconSetIcon1.Value = New Decimal(New Integer() {67, 0, 0, 0})
+        FormatConditionIconSetIcon1.ValueComparison = DevExpress.XtraEditors.FormatConditionComparisonType.GreaterOrEqual
+        FormatConditionIconSetIcon2.PredefinedName = "TrafficLights23_2.png"
+        FormatConditionIconSetIcon2.Value = New Decimal(New Integer() {33, 0, 0, 0})
+        FormatConditionIconSetIcon2.ValueComparison = DevExpress.XtraEditors.FormatConditionComparisonType.GreaterOrEqual
+        FormatConditionIconSetIcon3.PredefinedName = "TrafficLights23_3.png"
+        FormatConditionIconSetIcon3.ValueComparison = DevExpress.XtraEditors.FormatConditionComparisonType.GreaterOrEqual
+        FormatConditionIconSet1.Icons.Add(FormatConditionIconSetIcon1)
+        FormatConditionIconSet1.Icons.Add(FormatConditionIconSetIcon2)
+        FormatConditionIconSet1.Icons.Add(FormatConditionIconSetIcon3)
+        FormatConditionIconSet1.Name = "TrafficLights3Unrimmed"
+        FormatConditionIconSet1.ValueType = DevExpress.XtraEditors.FormatConditionValueType.Percent
+        FormatConditionRuleIconSet1.IconSet = FormatConditionIconSet1
+        GridFormatRule1.Rule = FormatConditionRuleIconSet1
+        GridFormatRule2.Column = Me.colDob
+        GridFormatRule2.Name = "FormatDob"
+        FormatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.White
+        FormatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.White
+        FormatConditionRuleExpression1.Appearance.BorderColor = System.Drawing.Color.White
+        FormatConditionRuleExpression1.Appearance.Font = New System.Drawing.Font("Tahoma", 9.0!)
+        FormatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.Red
+        FormatConditionRuleExpression1.Appearance.Options.UseBackColor = True
+        FormatConditionRuleExpression1.Appearance.Options.UseBorderColor = True
+        FormatConditionRuleExpression1.Appearance.Options.UseFont = True
+        FormatConditionRuleExpression1.Appearance.Options.UseForeColor = True
+        FormatConditionRuleExpression1.Expression = "GetYear([Dob]) < 1990"
+        GridFormatRule2.Rule = FormatConditionRuleExpression1
+        Me.gvPatients.FormatRules.Add(GridFormatRule1)
+        Me.gvPatients.FormatRules.Add(GridFormatRule2)
         Me.gvPatients.GridControl = Me.gcPatients
         Me.gvPatients.Name = "gvPatients"
         Me.gvPatients.OptionsSelection.MultiSelect = True
         Me.gvPatients.OptionsView.ShowGroupPanel = False
         Me.gvPatients.OptionsView.ShowIndicator = False
-        Me.gvPatients.RowHeight = 65
+        Me.gvPatients.RowHeight = 40
         '
         'colId
         '
@@ -213,7 +292,7 @@ Partial Class frmPatients
         Me.colId.OptionsColumn.AllowEdit = False
         Me.colId.Visible = True
         Me.colId.VisibleIndex = 0
-        Me.colId.Width = 151
+        Me.colId.Width = 137
         '
         'colFullname
         '
@@ -224,31 +303,17 @@ Partial Class frmPatients
         Me.colFullname.OptionsColumn.AllowEdit = False
         Me.colFullname.Visible = True
         Me.colFullname.VisibleIndex = 1
-        Me.colFullname.Width = 157
+        Me.colFullname.Width = 143
         '
-        'colDob
+        'colAge
         '
-        Me.colDob.Caption = "დაბ. დღე"
-        Me.colDob.DisplayFormat.FormatString = "dd.MM.yyyy"
-        Me.colDob.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.colDob.FieldName = "Dob"
-        Me.colDob.MinWidth = 40
-        Me.colDob.Name = "colDob"
-        Me.colDob.OptionsColumn.AllowEdit = False
-        Me.colDob.Visible = True
-        Me.colDob.VisibleIndex = 2
-        Me.colDob.Width = 144
-        '
-        'colGender
-        '
-        Me.colGender.Caption = "სქესი"
-        Me.colGender.FieldName = "GenderName"
-        Me.colGender.MinWidth = 40
-        Me.colGender.Name = "colGender"
-        Me.colGender.OptionsColumn.AllowEdit = False
-        Me.colGender.Visible = True
-        Me.colGender.VisibleIndex = 3
-        Me.colGender.Width = 149
+        Me.colAge.Caption = "ასაკი"
+        Me.colAge.FieldName = "Age"
+        Me.colAge.Name = "colAge"
+        Me.colAge.OptionsColumn.AllowEdit = False
+        Me.colAge.Visible = True
+        Me.colAge.VisibleIndex = 3
+        Me.colAge.Width = 65
         '
         'colPhone
         '
@@ -258,7 +323,7 @@ Partial Class frmPatients
         Me.colPhone.Name = "colPhone"
         Me.colPhone.OptionsColumn.AllowEdit = False
         Me.colPhone.Visible = True
-        Me.colPhone.VisibleIndex = 4
+        Me.colPhone.VisibleIndex = 5
         Me.colPhone.Width = 149
         '
         'colAddress
@@ -269,8 +334,8 @@ Partial Class frmPatients
         Me.colAddress.Name = "colAddress"
         Me.colAddress.OptionsColumn.AllowEdit = False
         Me.colAddress.Visible = True
-        Me.colAddress.VisibleIndex = 5
-        Me.colAddress.Width = 149
+        Me.colAddress.VisibleIndex = 6
+        Me.colAddress.Width = 132
         '
         'colPersonalNumber
         '
@@ -280,8 +345,8 @@ Partial Class frmPatients
         Me.colPersonalNumber.Name = "colPersonalNumber"
         Me.colPersonalNumber.OptionsColumn.AllowEdit = False
         Me.colPersonalNumber.Visible = True
-        Me.colPersonalNumber.VisibleIndex = 6
-        Me.colPersonalNumber.Width = 149
+        Me.colPersonalNumber.VisibleIndex = 7
+        Me.colPersonalNumber.Width = 132
         '
         'colMail
         '
@@ -291,8 +356,8 @@ Partial Class frmPatients
         Me.colMail.Name = "colMail"
         Me.colMail.OptionsColumn.AllowEdit = False
         Me.colMail.Visible = True
-        Me.colMail.VisibleIndex = 7
-        Me.colMail.Width = 164
+        Me.colMail.VisibleIndex = 8
+        Me.colMail.Width = 145
         '
         'colInsurance
         '
@@ -300,9 +365,30 @@ Partial Class frmPatients
         Me.colInsurance.FieldName = "InsuranceName"
         Me.colInsurance.MinWidth = 30
         Me.colInsurance.Name = "colInsurance"
+        Me.colInsurance.OptionsColumn.AllowEdit = False
         Me.colInsurance.Visible = True
-        Me.colInsurance.VisibleIndex = 8
-        Me.colInsurance.Width = 112
+        Me.colInsurance.VisibleIndex = 9
+        Me.colInsurance.Width = 99
+        '
+        'colAddressEmail
+        '
+        Me.colAddressEmail.Caption = "მისამართი / ელ.ფოსტა"
+        Me.colAddressEmail.ColumnEdit = Me.RepositoryItemMemoEdit1
+        Me.colAddressEmail.FieldName = "AddressEmail"
+        Me.colAddressEmail.Name = "colAddressEmail"
+        Me.colAddressEmail.OptionsColumn.AllowEdit = False
+        Me.colAddressEmail.Visible = True
+        Me.colAddressEmail.VisibleIndex = 10
+        Me.colAddressEmail.Width = 78
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
+        '
+        'RepositoryItemTextEdit1
+        '
+        Me.RepositoryItemTextEdit1.AutoHeight = False
+        Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
         '
         'lblId
         '
@@ -380,7 +466,7 @@ Partial Class frmPatients
         Me.Panel1.Location = New System.Drawing.Point(0, 39)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1310, 180)
+        Me.Panel1.Size = New System.Drawing.Size(1349, 180)
         Me.Panel1.TabIndex = 2
         '
         'btnClear
@@ -476,7 +562,7 @@ Partial Class frmPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1310, 621)
+        Me.ClientSize = New System.Drawing.Size(1349, 621)
         Me.Controls.Add(Me.gcPatients)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip1)
@@ -492,6 +578,8 @@ Partial Class frmPatients
         Me.ToolStrip1.PerformLayout()
         CType(Me.gcPatients, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gvPatients, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -532,4 +620,9 @@ Partial Class frmPatients
     Friend WithEvents btnClear As Button
     Friend WithEvents colInsurance As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents tsPrint As ToolStripButton
+    Friend WithEvents colAddressEmail As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents colAge As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents colGenderId As DevExpress.XtraGrid.Columns.GridColumn
 End Class

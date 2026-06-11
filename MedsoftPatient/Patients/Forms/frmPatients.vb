@@ -58,7 +58,9 @@ Public Class frmPatients
         If currentId > 0 Then
             Dim frm As New frmPatientAddEdit(currentId)
             frm.ShowDialog()
-            gcPatients.DataSource = handler.GetPatients()
+
+            gcPatients.DataSource =
+                handler.GetPatients(0, cbStatus.SelectedValue, txtFullname.Text, txtPersonalNumber.Text, txtAddress.Text, cbGender.SelectedValue)
         Else
             MessageBox.Show("აირჩიეთ სწორი პაციენტი.", "გაფრთხილება", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If

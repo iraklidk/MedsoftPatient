@@ -322,13 +322,11 @@ Partial Public Class dsPatientDataDetail
         
         Private columnDob As Global.System.Data.DataColumn
         
-        Private columnAddress As Global.System.Data.DataColumn
+        Private columnAddressEmail As Global.System.Data.DataColumn
         
         Private columnGenderName As Global.System.Data.DataColumn
         
         Private columnPhone As Global.System.Data.DataColumn
-        
-        Private columnEmail As Global.System.Data.DataColumn
         
         Private columnAge As Global.System.Data.DataColumn
         
@@ -387,9 +385,9 @@ Partial Public Class dsPatientDataDetail
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property AddressColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property AddressEmailColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnAddress
+                Return Me.columnAddressEmail
             End Get
         End Property
         
@@ -406,14 +404,6 @@ Partial Public Class dsPatientDataDetail
         Public ReadOnly Property PhoneColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnPhone
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public ReadOnly Property EmailColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnEmail
             End Get
         End Property
         
@@ -470,9 +460,9 @@ Partial Public Class dsPatientDataDetail
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddTopXPatientsRow(ByVal FullName As String, ByVal Dob As String, ByVal Address As String, ByVal GenderName As String, ByVal Phone As String, ByVal Email As String, ByVal Age As String, ByVal PersonalNumber As String) As TopXPatientsRow
+        Public Overloads Function AddTopXPatientsRow(ByVal FullName As String, ByVal Dob As Date, ByVal AddressEmail As String, ByVal GenderName As String, ByVal Phone As String, ByVal Age As String, ByVal PersonalNumber As String) As TopXPatientsRow
             Dim rowTopXPatientsRow As TopXPatientsRow = CType(Me.NewRow,TopXPatientsRow)
-            Dim columnValuesArray() As Object = New Object() {FullName, Dob, Address, GenderName, Phone, Email, Age, PersonalNumber}
+            Dim columnValuesArray() As Object = New Object() {FullName, Dob, AddressEmail, GenderName, Phone, Age, PersonalNumber}
             rowTopXPatientsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTopXPatientsRow)
             Return rowTopXPatientsRow
@@ -497,10 +487,9 @@ Partial Public Class dsPatientDataDetail
         Friend Sub InitVars()
             Me.columnFullName = MyBase.Columns("FullName")
             Me.columnDob = MyBase.Columns("Dob")
-            Me.columnAddress = MyBase.Columns("Address")
+            Me.columnAddressEmail = MyBase.Columns("AddressEmail")
             Me.columnGenderName = MyBase.Columns("GenderName")
             Me.columnPhone = MyBase.Columns("Phone")
-            Me.columnEmail = MyBase.Columns("Email")
             Me.columnAge = MyBase.Columns("Age")
             Me.columnPersonalNumber = MyBase.Columns("PersonalNumber")
         End Sub
@@ -510,16 +499,14 @@ Partial Public Class dsPatientDataDetail
         Private Sub InitClass()
             Me.columnFullName = New Global.System.Data.DataColumn("FullName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFullName)
-            Me.columnDob = New Global.System.Data.DataColumn("Dob", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnDob = New Global.System.Data.DataColumn("Dob", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDob)
-            Me.columnAddress = New Global.System.Data.DataColumn("Address", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnAddress)
+            Me.columnAddressEmail = New Global.System.Data.DataColumn("AddressEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAddressEmail)
             Me.columnGenderName = New Global.System.Data.DataColumn("GenderName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnGenderName)
             Me.columnPhone = New Global.System.Data.DataColumn("Phone", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPhone)
-            Me.columnEmail = New Global.System.Data.DataColumn("Email", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnEmail)
             Me.columnAge = New Global.System.Data.DataColumn("Age", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAge)
             Me.columnPersonalNumber = New Global.System.Data.DataColumn("PersonalNumber", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1028,10 +1015,10 @@ Partial Public Class dsPatientDataDetail
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Dob() As String
+        Public Property Dob() As Date
             Get
                 Try 
-                    Return CType(Me(Me.tableTopXPatients.DobColumn),String)
+                    Return CType(Me(Me.tableTopXPatients.DobColumn),Date)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Dob' in table 'TopXPatients' is DBNull.", e)
                 End Try
@@ -1043,16 +1030,16 @@ Partial Public Class dsPatientDataDetail
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Address() As String
+        Public Property AddressEmail() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableTopXPatients.AddressColumn),String)
+                    Return CType(Me(Me.tableTopXPatients.AddressEmailColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Address' in table 'TopXPatients' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AddressEmail' in table 'TopXPatients' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableTopXPatients.AddressColumn) = value
+                Me(Me.tableTopXPatients.AddressEmailColumn) = value
             End Set
         End Property
         
@@ -1083,21 +1070,6 @@ Partial Public Class dsPatientDataDetail
             End Get
             Set
                 Me(Me.tableTopXPatients.PhoneColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property Email() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableTopXPatients.EmailColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Email' in table 'TopXPatients' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableTopXPatients.EmailColumn) = value
             End Set
         End Property
         
@@ -1157,14 +1129,14 @@ Partial Public Class dsPatientDataDetail
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsAddressNull() As Boolean
-            Return Me.IsNull(Me.tableTopXPatients.AddressColumn)
+        Public Function IsAddressEmailNull() As Boolean
+            Return Me.IsNull(Me.tableTopXPatients.AddressEmailColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetAddressNull()
-            Me(Me.tableTopXPatients.AddressColumn) = Global.System.Convert.DBNull
+        Public Sub SetAddressEmailNull()
+            Me(Me.tableTopXPatients.AddressEmailColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1189,18 +1161,6 @@ Partial Public Class dsPatientDataDetail
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub SetPhoneNull()
             Me(Me.tableTopXPatients.PhoneColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Function IsEmailNull() As Boolean
-            Return Me.IsNull(Me.tableTopXPatients.EmailColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Sub SetEmailNull()
-            Me(Me.tableTopXPatients.EmailColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

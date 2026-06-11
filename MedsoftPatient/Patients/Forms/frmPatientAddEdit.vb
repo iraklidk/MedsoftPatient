@@ -160,9 +160,6 @@ Public Class frmPatientAddEdit
 
         If (cbInsurance.SelectedValue IsNot Nothing) Then
             InsuranceId = CInt(cbInsurance.SelectedValue)
-        Else
-            MessageBox.Show("სადაზღვეოს არჩევისას მოხდა შეცდომა", "შეცდომა", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
         End If
 
         Dim patientData As New PatientsModel()
